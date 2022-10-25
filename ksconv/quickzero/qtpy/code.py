@@ -1,26 +1,23 @@
-import time
-
-from input_channel import InputChannel
 from keyboard import Keyboard
+from input_channel import InputChannel
+from status_channel import StatusChannel
 
 
-channel = InputChannel()
+status_channel = StatusChannel.create()
+input_channel = InputChannel.create(status_channel=status_channel)
 keyboard = Keyboard()
 
 
 while True:
+    status_channel.indicate_ready()
     try:
-        command = channel.read_byte()
-
-        if command != 1 and command != 2:
-            raise Exception(f'Unexpected command: {command}')
-
-        keycode = channel.read_byte()
+        command, keycode = input_channel.read_command()
 
         if command == 1:
             keyboard.press(keycode)
-        else:
+        elif command == 2:
             keyboard.release(keycode)
-    except Exception as exc:
-        print(str(exc))
-        time.sleep(0.2)
+        else:
+            status_channel.indicate_error(sleep=0.1)
+    except Exception:
+        status_channel.indicate_error(sleep=0.1)
