@@ -1,7 +1,7 @@
 import time
 
-import board
-import neopixel
+# import board
+# import neopixel
 
 
 class StatusChannel:
@@ -10,17 +10,20 @@ class StatusChannel:
 
     @classmethod
     def create(cls):
-        pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
-        pixel.brightness = 0.3
+        # pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
+        # pixel.brightness = 0.3
+        pixel = None
         return cls(pixel=pixel)
 
     def indicate_busy():
-        self._pixel.fill((0, 0, 255))
+        # self._pixel.fill((0, 0, 255))
+        pass
 
     def inidicate_error(self, sleep=0):
-        self._pixel.fill((0, 0, 255))
+        # self._pixel.fill((0, 0, 255))
         if sleep > 0:
             time.sleep(sleep)
 
     def indicate_ready():
-        self._pixel.fill((0, 255, 0))
+        # self._pixel.fill((0, 255, 0))
+        pass

@@ -10,14 +10,20 @@ keyboard = Keyboard()
 
 while True:
     status_channel.indicate_ready()
+
     try:
-        command, keycode = input_channel.read_command()
+        command = input_channel.read()
 
         if command == 1:
+            keycode = input_channel.read()
             keyboard.press(keycode)
+
         elif command == 2:
+            keycode = input_channel.read()
             keyboard.release(keycode)
+
         else:
             status_channel.indicate_error(sleep=0.1)
+
     except Exception:
         status_channel.indicate_error(sleep=0.1)
