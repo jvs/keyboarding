@@ -15,7 +15,7 @@ class StatusChannel:
         pixel = None
         return cls(pixel=pixel)
 
-    def indicate_busy():
+    def indicate_busy(self):
         # self._pixel.fill((0, 0, 255))
         pass
 
@@ -24,6 +24,6 @@ class StatusChannel:
         if sleep > 0:
             time.sleep(sleep)
 
-    def indicate_ready():
+    def indicate_ready(self):
         # self._pixel.fill((0, 255, 0))
         pass
