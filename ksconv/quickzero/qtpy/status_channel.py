@@ -19,7 +19,7 @@ class StatusChannel:
         # self._pixel.fill((0, 0, 255))
         pass
 
-    def inidicate_error(self, sleep=0):
+    def indicate_error(self, sleep=0):
         # self._pixel.fill((0, 0, 255))
         if sleep > 0:
             time.sleep(sleep)
