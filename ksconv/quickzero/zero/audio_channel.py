@@ -14,8 +14,8 @@ class Note:
 
 
 class AudioChannel:
-    def __init__(self, buzzer_pin: int):
-        self._buzzer = Buzzer(pin=buzzer_pin)
+    def __init__(self, buzzer: 'Buzzer'):
+        self._buzzer = buzzer
         self._thread = None
 
     def play_song(self, song: 'list[Note]'):

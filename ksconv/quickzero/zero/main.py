@@ -2,12 +2,14 @@ import board
 import RPi.GPIO as GPIO
 
 from audio_channel import AudioChannel, Note
+from buzzer import Buzzer
 
 buzzer_pin = 12
 
 
 def run():
-    audio = AudioChannel(buzzer_pin=buzzer_pin)
+    buzzer = Buzzer(pin=buzzer_pin, volume=0.8)
+    audio = AudioChannel(buzzer=buzzer)
     song = [
         Note(frequency=200),
         Note(frequency=400, duration=1.0),
