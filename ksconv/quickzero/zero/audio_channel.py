@@ -32,20 +32,20 @@ class AudioChannel:
     def wait(self):
         if self._thread is not None:
             self._thread.join()
-            seld._thread = None
+            self._thread = None
 
 
 class _PlaybackThread(threading.Thread):
     def __init__(self, buzzer: 'Buzzer', song: 'list[Note]'):
-        threading.Thread.__init__(self, daemon=True)
+        threading.Thread.__init__(self)
         self._buzzer = buzzer
         self._song = deque(song)
         self._is_alive = True
         self._deadline = None
 
     def run(self):
-        while self._is_alive and self._deadline is not None:
-            if self._deadline > time.time():
+        while self._is_alive:
+            if self._deadline is not None and self._deadline > time.time():
                 time.sleep(0.01)
                 continue
 
@@ -54,8 +54,10 @@ class _PlaybackThread(threading.Thread):
 
             if self._song:
                 note = self._song.popleft()
-                self._buzzer.start(frequency=note.freqeuncy, volume=note.volume)
+                self._buzzer.start(frequency=note.frequency, volume=note.volume)
                 self._deadline = time.time() + note.duration
+            else:
+                break
 
     def stop(self):
         self._is_alive = False

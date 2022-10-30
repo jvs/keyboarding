@@ -22,8 +22,8 @@ class Buzzer:
         if volume is not None:
             self._volume = volume
 
-        duty_cycle = int((2 ** 16 - 1) * volume)
-        self._pwm.start(duty_cycle)
+        # duty_cycle = int((2 ** 16 - 1) * self._volume)
+        self._pwm.start(int(self._volume * 100))
         self._is_busy = True
 
     def stop(self):

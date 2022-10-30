@@ -7,7 +7,7 @@ buzzer_pin = 12
 
 
 def run():
-    audio = AudioChannel(pin=buzzer_pin)
+    audio = AudioChannel(buzzer_pin=buzzer_pin)
     song = [
         Note(frequency=200),
         Note(frequency=400, duration=1.0),
@@ -26,3 +26,6 @@ def main():
     finally:
         GPIO.cleanup()
 
+
+if __name__ == '__main__':
+    main()
