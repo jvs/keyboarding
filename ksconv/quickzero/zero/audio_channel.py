@@ -9,7 +9,6 @@ from buzzer import Buzzer
 @dataclass
 class Note:
     frequency: float = None
-    volume: float = None
     duration: float = 0.1
 
 
@@ -17,6 +16,14 @@ class AudioChannel:
     def __init__(self, buzzer: 'Buzzer'):
         self._buzzer = buzzer
         self._thread = None
+
+    def start(self, frequency: float):
+        self.stop_song()
+        self._buzzer.start(frequency=frequency)
+
+    def stop(self):
+        self.stop_song()
+        self._buzzer.stop()
 
     def play_song(self, song: 'list[Note]'):
         self.stop_song()
@@ -54,7 +61,8 @@ class _PlaybackThread(threading.Thread):
 
             if self._song:
                 note = self._song.popleft()
-                self._buzzer.start(frequency=note.frequency, volume=note.volume)
+                if note.frequency is not None:
+                    self._buzzer.start(frequency=note.frequency)
                 self._deadline = time.time() + note.duration
             else:
                 break
