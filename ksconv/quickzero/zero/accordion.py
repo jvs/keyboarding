@@ -75,7 +75,6 @@ class Accordion:
 def _build_layout(layout_string, min_frequency=400):
     result = {}
     next_notes = list(notes)
-    print('notes:', next_notes)
 
     for line in layout_string.split('\n'):
         line = line.strip()
@@ -89,7 +88,6 @@ def _build_layout(layout_string, min_frequency=400):
                 continue
             if note == next_note:
                 result[key] = next_frequency
+                break
 
-    print('result:')
-    print(result)
     return result
