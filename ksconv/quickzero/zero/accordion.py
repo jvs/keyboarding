@@ -90,6 +90,7 @@ def _build_layout(layout_string, min_frequency=10):
 
         while next_notes:
             next_note, next_frequency = next_notes.popleft()
+            next_notes.popleft()
             result[key] = next_frequency
             break
             # print('  considering', repr(next_note), repr(next_frequency))
