@@ -22,7 +22,6 @@ class Buzzer:
             self._volume = volume
 
         duty_cycle = int(self._volume * 100)
-        print('frequency:', frequency, 'duty cyle:', duty_cycle)
         self._pwm.start(duty_cycle)
         self._is_busy = True
 
