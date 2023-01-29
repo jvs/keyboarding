@@ -61,6 +61,8 @@ class Accordion:
         self._current_key = None
 
     def on_key_down(self, key: str):
+        if self._current_key == key:
+            return
         if key in self._layout:
             self._current_key = key
             self._audio_channel.start(self._layout[key])
@@ -73,6 +75,7 @@ class Accordion:
 def _build_layout(layout_string, min_frequency=400):
     result = {}
     next_notes = list(notes)
+    print('notes:', next_notes)
 
     for line in layout_string.split('\n'):
         line = line.strip()
@@ -87,4 +90,6 @@ def _build_layout(layout_string, min_frequency=400):
             if note == next_note:
                 result[key] = next_frequency
 
+    print('result:')
+    print(result)
     return result
