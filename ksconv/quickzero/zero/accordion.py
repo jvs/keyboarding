@@ -75,19 +75,28 @@ class Accordion:
 def _build_layout(layout_string, min_frequency=400):
     result = {}
     next_notes = list(notes)
+    print('notes:', next_notes)
 
     for line in layout_string.split('\n'):
         line = line.strip()
         if not line:
             continue
         key, note = line.split(': ')
+        print('looking for', repr(key), repr(note))
 
         while next_notes:
             next_note, next_frequency = next_notes.pop()
+            print('  considering', repr(next_note), repr(next_frequency))
             if next_frequency < min_frequency:
+                print('     too low')
                 continue
             if note == next_note:
+                print('      found!')
                 result[key] = next_frequency
                 break
+            else:
+                print('      wrong note')
 
+    print('result:')
+    print(result)
     return result
