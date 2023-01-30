@@ -1,6 +1,6 @@
 import keyboard
 
-from keycodes import keycodes, keynames
+from keycodes import get_key_name
 
 
 class KeyboardChannel:
@@ -20,7 +20,7 @@ class KeyboardChannel:
         is_down = event.event_type == 'down'
         is_up = event.event_type == 'up'
 
-        name = keynames.get(event.scan_code, event.name)
+        name = get_key_name(event)
         print('keyboard event:', repr(name), is_down, is_up)
 
         if is_down:

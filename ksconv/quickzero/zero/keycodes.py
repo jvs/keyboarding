@@ -9,6 +9,10 @@ keynames = {
     125: 'left gui',
 }
 
+ascii_names = {
+    '\u2212': '-',
+}
+
 keycodes = {
     'a': 0x04,
     'b': 0x05,
@@ -109,3 +113,8 @@ keycodes = {
     'right alt': 0xE6,
     'right gui': 0xE7,
 }
+
+
+def get_key_name(event):
+    name = keynames.get(event.scan_code, event.name)
+    return ascii_names.get(name, name)

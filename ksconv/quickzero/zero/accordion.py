@@ -2,57 +2,12 @@ from collections import deque
 
 from notes import notes
 
+
 layout = '''
-    `: C
-    1: D#
-    2: F#
-    3: A
-    4: C
-    5: D#
-    6: F#
-    7: A
-    8: C
-    9: D#
-    0: F#
-    -: A
-    =: C
-
-    q: E
-    w: G
-    e: A#
-    r: C#
-    t: E
-    y: G
-    u: A#
-    i: A#
-    o: E
-    p: G
-    [: A#
-    ]: C#
-    \\: E
-
-    a: F
-    s: G#
-    d: B
-    f: D
-    g: F
-    h: G#
-    j: B
-    k: D
-    l: F
-    ;: G#
-    ': B
-
-    z: F#
-    x: A
-    c: C
-    v: D#
-    b: F#
-    n: A
-    m: C
-    ,: D#
-    .: F#
-    /: A
+    `1234567890-=
+    qwertyuiop[]\\
+    asdfghjkl;'
+    zxcvbnm,.
 '''
 
 
@@ -75,35 +30,19 @@ class Accordion:
             self._current_key = None
 
 
-def _build_layout(layout_string, min_frequency=10):
+def _build_layout(layout_string, min_frequency=30, steps=3):
     result = {}
-    next_notes = deque(notes)
-    print('notes:')
-    print(next_notes)
 
-    for line in layout_string.split('\n'):
-        line = line.strip()
-        if not line:
+    index = 0
+    while notes[index][1] <= min_frequency:
+        index += 1
+
+    for c in layout:
+        if c == ' ' or c == '\n':
             continue
-        key, note = line.split(': ')
-        print('looking for', repr(key), repr(note))
+        result[c] = notes[index]
+        index += steps
 
-        while next_notes:
-            next_note, next_frequency = next_notes.popleft()
-            next_notes.popleft()
-            result[key] = next_frequency
-            break
-            # print('  considering', repr(next_note), repr(next_frequency))
-            # if next_frequency < min_frequency:
-            #     print('     too low')
-            #     continue
-            # if note == next_note:
-            #     print('      found!')
-            #     result[key] = next_frequency
-            #     break
-            # else:
-            #     print('      wrong note')
-
-    print('\nlayout:')
+    print('layout:')
     print(result)
     return result
