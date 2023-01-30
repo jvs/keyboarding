@@ -1,18 +1,3 @@
-keynames = {
-    29: 'left ctrl',
-    42: 'left shift',
-    54: 'right shift',
-    56: 'left alt',
-    97: 'right ctrl',
-    99: 'print screen',
-    100: 'right alt',
-    125: 'left gui',
-}
-
-ascii_names = {
-    '\u2212': '-',
-}
-
 keycodes = {
     'a': 0x04,
     'b': 0x05,
@@ -113,8 +98,3 @@ keycodes = {
     'right alt': 0xE6,
     'right gui': 0xE7,
 }
-
-
-def get_key_name(event):
-    name = keynames.get(event.scan_code, event.name)
-    return ascii_names.get(name, name)
