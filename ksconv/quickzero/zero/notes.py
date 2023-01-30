@@ -154,4 +154,3 @@ for line in raw_notes.split('\n'):
     name, freq = line.split(' ')
     freq = float(freq.strip())
     notes.append((name, freq))
-
